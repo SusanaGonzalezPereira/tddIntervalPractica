@@ -70,4 +70,14 @@ public class IntervalTest {
     Interval interval = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
     assertTrue(interval.intersect(interval));
   }
+
+  @Test
+  public void intervalDoesNotContainLeftIntervalTest() {
+    Interval intervalA = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
+    this.intervalBuilder = new IntervalBuilder();
+    Interval intervalB = this.intervalBuilder.closed(left.getLess()).closed(left.getEquals()).build();
+    assertFalse(intervalA.intersect(intervalB));
+  }
+
+
 }
