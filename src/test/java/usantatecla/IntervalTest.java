@@ -95,4 +95,10 @@ public class IntervalTest {
     assertFalse(intervalA.intersect(intervalB));
   }
 
+  @Test
+  public void givenIntervalContainsIntervalOpenTest() {
+    Interval interval = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
+    assertTrue(interval.intersect(interval));
+  }
+
 }
