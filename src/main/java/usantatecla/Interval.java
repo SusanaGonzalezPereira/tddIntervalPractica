@@ -58,7 +58,8 @@ public class Interval {
 		if (this.areLimitsCrossed(candidateInterval)) {
 			return this.isMutualLimitContained(candidateInterval);
 		}
-		return this.include(candidateInterval.min.value) || this.include(candidateInterval.max.value);
+		return (this.include(candidateInterval.min.value) || this.include(candidateInterval.max.value))
+				|| (this.min.value >= candidateInterval.min.value && this.max.value <= candidateInterval.max.value);
 	}
 
 	private boolean isMutualLimitContained(Interval candidateInterval) {
