@@ -61,9 +61,11 @@ public class Interval {
 		return this.include(candidateInterval.min.value) || this.include(candidateInterval.max.value);
 	}
 
-	private boolean isMutualLimitContained(Interval candidateInterval){
-		return (this.include(candidateInterval.min.value) && candidateInterval.include(candidateInterval.min.value))
-				|| (this.include(candidateInterval.max.value) && candidateInterval.include(candidateInterval.max.value));
+	private boolean isMutualLimitContained(Interval candidateInterval) {
+		double minVal = candidateInterval.min.value;
+		double maxVal = candidateInterval.max.value;
+		return (this.include(minVal) && candidateInterval.include(minVal))
+				|| (this.include(maxVal) && candidateInterval.include(maxVal));
 	}
 
 	private boolean areLimitsEqual(Interval candidateInterval) {
