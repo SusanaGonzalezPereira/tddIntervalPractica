@@ -68,7 +68,7 @@ public class IntervalTest {
   @Test
   public void givenIntervalContainsIntervalTest() {
     Interval interval = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
-    assertTrue(interval.intersect(interval));
+    assertTrue(interval.doLimitsOverlap(interval));
   }
 
   @Test
@@ -76,7 +76,7 @@ public class IntervalTest {
     Interval intervalA = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
     this.intervalBuilder = new IntervalBuilder();
     Interval intervalB = this.intervalBuilder.closed(left.getLess()).closed(left.getEquals()).build();
-    assertFalse(intervalA.intersect(intervalB));
+    assertFalse(intervalA.doLimitsOverlap(intervalB));
   }
 
   @Test
@@ -84,7 +84,7 @@ public class IntervalTest {
     Interval intervalA = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
     this.intervalBuilder = new IntervalBuilder();
     Interval intervalB = this.intervalBuilder.closed(left.getLess()).closed(left.getGreater()).build();
-    assertTrue(intervalA.intersect(intervalB));
+    assertTrue(intervalA.doLimitsOverlap(intervalB));
   }
 
   @Test
@@ -92,21 +92,21 @@ public class IntervalTest {
     Interval intervalA = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
     this.intervalBuilder = new IntervalBuilder();
     Interval intervalB = this.intervalBuilder.open(left.getLess()).open(left.getEquals()).build();
-    assertFalse(intervalA.intersect(intervalB));
+    assertFalse(intervalA.doLimitsOverlap(intervalB));
   }
 
   @Test
   public void givenIntervalContainsIntervalOpenTest() {
     Interval interval = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
-    assertTrue(interval.intersect(interval));
+    assertTrue(interval.doLimitsOverlap(interval));
   }
 
   @Test
-  public void givenIntervalIntersectWiderTestTest() {
+  public void givenIntervalIntersectWiderTest() {
     Interval intervalA = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
     this.intervalBuilder = new IntervalBuilder();
     Interval intervalB = this.intervalBuilder.closed(left.getLess()).closed(right.getGreater()).build();
-    assertTrue(intervalA.intersect(intervalB));
+    assertTrue(intervalA.doLimitsOverlap(intervalB));
   }
 
 }

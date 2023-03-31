@@ -51,7 +51,7 @@ public class Interval {
 		return this.min.toString() + ", " + max.toString();
 	}
 
-	public boolean intersect(Interval candidateInterval) {
+	public boolean doLimitsOverlap(Interval candidateInterval) {
 		if (this.areLimitsEqual(candidateInterval)) {
 			return true;
 		}
