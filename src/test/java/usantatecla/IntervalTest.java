@@ -101,4 +101,12 @@ public class IntervalTest {
     assertTrue(interval.intersect(interval));
   }
 
+  @Test
+  public void givenIntervalIntersectWiderTestTest() {
+    Interval intervalA = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
+    this.intervalBuilder = new IntervalBuilder();
+    Interval intervalB = this.intervalBuilder.closed(left.getLess()).closed(right.getGreater()).build();
+    assertTrue(intervalA.intersect(intervalB));
+  }
+
 }
