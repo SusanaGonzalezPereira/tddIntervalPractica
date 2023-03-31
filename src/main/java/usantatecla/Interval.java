@@ -52,16 +52,26 @@ public class Interval {
 	}
 
 	public boolean intersect(Interval candidateInterval) {
-		if (this.min.value == candidateInterval.min.value || this.max.value == candidateInterval.max.value) {
+		if (this.areLimitsEqual(candidateInterval)) {
 			return true;
 		}
-		if (this.min.value == candidateInterval.max.value || this.max.value == candidateInterval.min.value) {
-			return this.containMutualLimit(candidateInterval);
-		} else return this.include(candidateInterval.min.value) || this.include(candidateInterval.max.value);
+		if (this.areLimitsCrossed(candidateInterval)) {
+			return this.isMutualLimitContained(candidateInterval);
+		}
+		return this.include(candidateInterval.min.value) || this.include(candidateInterval.max.value);
 	}
 
-	private boolean containMutualLimit(Interval candidateInterval){
+	private boolean isMutualLimitContained(Interval candidateInterval){
 		return (this.include(candidateInterval.min.value) && candidateInterval.include(candidateInterval.min.value))
 				|| (this.include(candidateInterval.max.value) && candidateInterval.include(candidateInterval.max.value));
 	}
+
+	private boolean areLimitsEqual(Interval candidateInterval) {
+		return this.min.equals(candidateInterval.min) || this.max.equals(candidateInterval.max);
+	}
+
+	private boolean areLimitsCrossed(Interval candidateInterval) {
+		return this.min.value == candidateInterval.max.value || this.max.value == candidateInterval.min.value;
+	}
+
 }
