@@ -52,6 +52,6 @@ public class Interval {
 	}
 
 	public boolean intersect(Interval value) {
-		return true;
+		return this.include(value.min.value);
 	}
 }
