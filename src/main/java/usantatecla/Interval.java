@@ -53,9 +53,12 @@ public class Interval {
 
 	public boolean intersect(Interval candidateInterval) {
 		if (this.min.value == candidateInterval.max.value || this.max.value == candidateInterval.min.value) {
-			return (this.include(candidateInterval.min.value) && candidateInterval.include(candidateInterval.min.value))
-					|| (this.include(candidateInterval.max.value) && candidateInterval.include(candidateInterval.max.value));
-		}
-		else return this.include(candidateInterval.min.value) || this.include(candidateInterval.max.value);
+			return this.containMutualLimit(candidateInterval);
+		} else return this.include(candidateInterval.min.value) || this.include(candidateInterval.max.value);
+	}
+
+	private boolean containMutualLimit(Interval candidateInterval){
+		return (this.include(candidateInterval.min.value) && candidateInterval.include(candidateInterval.min.value))
+				|| (this.include(candidateInterval.max.value) && candidateInterval.include(candidateInterval.max.value));
 	}
 }
