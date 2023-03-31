@@ -66,13 +66,13 @@ public class IntervalTest {
     assertFalse(interval.include(right.getGreater()));
   }
   @Test
-  public void intervalContainsIntervalTest() {
+  public void givenIntervalContainsIntervalTest() {
     Interval interval = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
     assertTrue(interval.intersect(interval));
   }
 
   @Test
-  public void intervalDoesNotContainLeftIntervalTest() {
+  public void givenIntervalDoesNotContainLeftIntervalTest() {
     Interval intervalA = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
     this.intervalBuilder = new IntervalBuilder();
     Interval intervalB = this.intervalBuilder.closed(left.getLess()).closed(left.getEquals()).build();
@@ -80,11 +80,19 @@ public class IntervalTest {
   }
 
   @Test
-  public void intervalContainsPartialLeftIntervalTest() {
+  public void givenIntervalContainsPartialLeftIntervalTest() {
     Interval intervalA = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
     this.intervalBuilder = new IntervalBuilder();
     Interval intervalB = this.intervalBuilder.closed(left.getLess()).closed(left.getGreater()).build();
     assertTrue(intervalA.intersect(intervalB));
+  }
+
+  @Test
+  public void givenIntervalDoesNotContainLimitValueTest() {
+    Interval intervalA = this.intervalBuilder.closed(left.getEquals()).closed(right.getEquals()).build();
+    this.intervalBuilder = new IntervalBuilder();
+    Interval intervalB = this.intervalBuilder.open(left.getLess()).open(left.getEquals()).build();
+    assertFalse(intervalA.intersect(intervalB));
   }
 
 }
