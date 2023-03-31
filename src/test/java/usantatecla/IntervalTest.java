@@ -79,5 +79,12 @@ public class IntervalTest {
     assertFalse(intervalA.intersect(intervalB));
   }
 
+  @Test
+  public void intervalContainsPartialLeftIntervalTest() {
+    Interval intervalA = this.intervalBuilder.open(left.getEquals()).open(right.getEquals()).build();
+    this.intervalBuilder = new IntervalBuilder();
+    Interval intervalB = this.intervalBuilder.closed(left.getLess()).closed(left.getGreater()).build();
+    assertTrue(intervalA.intersect(intervalB));
+  }
 
 }
