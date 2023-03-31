@@ -52,6 +52,6 @@ public class Interval {
 	}
 
 	public boolean intersect(Interval candidateInterval) {
-		return this.include(candidateInterval.min.value);
+		return this.include(candidateInterval.min.value) || this.include(candidateInterval.max.value);
 	}
 }
